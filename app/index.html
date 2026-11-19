@@ -3,20 +3,84 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cover Snap</title>
+<meta name="theme-color" content="#0a0710">
+<title>Neon Coast Cover Studio</title>
 <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+<header class="topbar">
+  <div class="brand"><span class="mark">NC</span><span>NEON COAST <b>COVER STUDIO</b></span></div>
+  <div class="topmeta">LOCAL ONLY / NOTHING LEAVES YOUR MACHINE</div>
+</header>
 <main class="app">
-  <section class="controls">
-    <h1>Cover Snap</h1>
-    <p>A photo and a caption, made into a square cover.</p>
-    <label>Photo <input id="photo" type="file" accept="image/*"></label>
-    <label>Caption <input id="caption" type="text" maxlength="40" value="Sunset Heist"></label>
-    <button id="export" type="button">Export PNG 1080 x 1080</button>
-    <p id="status" role="status"></p>
+  <aside class="controls">
+    <div class="rail-head">
+      <h1>Build the cover</h1>
+      <p>Three photos, one caption, a poster that never existed.</p>
+    </div>
+    <fieldset>
+      <legend>01 / PHOTOS</legend>
+      <label>Panel A <span class="hint">hero</span><input id="photo-a" type="file" accept="image/*"></label>
+      <label>Panel B <span class="hint">supporting</span><input id="photo-b" type="file" accept="image/*"></label>
+      <label>Panel C <span class="hint">supporting</span><input id="photo-c" type="file" accept="image/*"></label>
+    </fieldset>
+    <fieldset>
+      <legend>02 / WORDS</legend>
+      <label>Caption <input id="caption" type="text" maxlength="40" value="SUNSET HEIST"></label>
+    </fieldset>
+    <fieldset>
+      <legend>03 / SHAPE</legend>
+      <label>Layout
+        <select id="layout">
+          <option value="four">Four panels</option>
+          <option value="hero">Hero + three</option>
+          <option value="full">Full bleed</option>
+        </select>
+      </label>
+      <label>Colour grade
+        <select id="grade">
+          <option value="sunset">Sunset</option>
+          <option value="neon">Neon</option>
+          <option value="midnight">Midnight</option>
+          <option value="bleach">Bleach</option>
+        </select>
+      </label>
+    </fieldset>
+    <fieldset>
+      <legend>04 / FRAME EACH PANEL</legend>
+      <div class="adjust-grid">
+        <div class="adjust-col"><h2>A</h2>
+          <label>Zoom <input id="zoom-a" type="range" min="0.7" max="2" step="0.01" value="1"><output data-for="zoom-a">100%</output></label>
+          <label>Pan X <input id="x-a" type="range" min="-0.3" max="0.3" step="0.01" value="0"><output data-for="x-a">0%</output></label>
+          <label>Pan Y <input id="y-a" type="range" min="-0.3" max="0.3" step="0.01" value="0"><output data-for="y-a">0%</output></label>
+        </div>
+        <div class="adjust-col"><h2>B</h2>
+          <label>Zoom <input id="zoom-b" type="range" min="0.7" max="2" step="0.01" value="1"><output data-for="zoom-b">100%</output></label>
+          <label>Pan X <input id="x-b" type="range" min="-0.3" max="0.3" step="0.01" value="0"><output data-for="x-b">0%</output></label>
+          <label>Pan Y <input id="y-b" type="range" min="-0.3" max="0.3" step="0.01" value="0"><output data-for="y-b">0%</output></label>
+        </div>
+        <div class="adjust-col"><h2>C</h2>
+          <label>Zoom <input id="zoom-c" type="range" min="0.7" max="2" step="0.01" value="1"><output data-for="zoom-c">100%</output></label>
+          <label>Pan X <input id="x-c" type="range" min="-0.3" max="0.3" step="0.01" value="0"><output data-for="x-c">0%</output></label>
+          <label>Pan Y <input id="y-c" type="range" min="-0.3" max="0.3" step="0.01" value="0"><output data-for="y-c">0%</output></label>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>05 / SIZE &amp; EXPORT</legend>
+      <div class="sizes">
+        <button type="button" class="size active" data-size="1080x1080">1:1<small>1080×1080</small></button>
+        <button type="button" class="size" data-size="1080x1350">4:5<small>1080×1350</small></button>
+        <button type="button" class="size" data-size="1920x1080">16:9<small>1920×1080</small></button>
+      </div>
+      <button id="export" class="primary" type="button">Export PNG</button>
+    </fieldset>
+  </aside>
+  <section class="stage">
+    <div class="stage-head"><span>LIVE PREVIEW</span><span id="size-label">1080 × 1080</span></div>
+    <div class="frame"><canvas id="cover" width="1080" height="1080" aria-label="Live cover preview"></canvas></div>
+    <p id="status" role="status">Ready — add a photo or use the sample scenes.</p>
   </section>
-  <canvas id="cover" width="1080" height="1080" aria-label="The cover"></canvas>
 </main>
 <script type="module" src="./src/main.js"></script>
 </body>

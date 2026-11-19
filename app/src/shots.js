@@ -1,7 +1,12 @@
-// Fixed scenes for screenshots: ?shot=editor shows the page with a sample photo; ?shot=cover shows the cover alone.
-// `photo` picks the sample (samples/<photo>.jpg) and `caption` the words. window.__shotReady is set once painted.
+// Fixed scenes for the three screenshots. `cover` isolates the canvas, `editor` keeps the whole studio visible.
+// `load(sample, caption)` is supplied by main.js; window.__shotReady flips once the painted frame has composite.
 export async function runShot(shot, query, load) {
   if (shot === 'cover') document.body.classList.add('shot-cover');
-  await load(`samples/${query.get('photo') ?? 'pier'}.jpg`, query.get('caption') ?? 'Sunset Heist');
-  requestAnimationFrame(() => requestAnimationFrame(() => { window.__shotReady = true; }));
+  else document.body.dataset.shot = 'editor';
+  const photo = query.get('photo') || 'boulevard';
+  const caption = query.get('caption') || 'SUNSET HEIST';
+  await load(`samples/${photo}.jpg`, caption);
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    window.__shotReady = true;
+  }));
 }
